@@ -1,0 +1,10 @@
+{% if user_list %}
+	Select a user:<br>
+	<ul>
+	{% for user in user_list %}
+		<li>{{ user.first_name }} {{ user.last_name }}</li>
+	{% endfor %}
+	</ul>
+{% else %}
+	Cannot connect to database!
+{% endif %}
