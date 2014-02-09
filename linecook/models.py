@@ -46,7 +46,7 @@ class Recipe(models.Model):
 	def human_instructions(self):
 		output = ''
 		recipe = self.get_recipe()
-		if recipe.step_set.all():
+		try:
 			for step in recipe.step_set.all():
 				if step.mode == 'P':
 					output += 'Preheat to ' + str(step.temp) + ' '
@@ -56,7 +56,7 @@ class Recipe(models.Model):
 					output += step.mode + ' at ' + str(step.temp) + ' for ' + str(step.time) + ' minutes, '
 
 			output += 'by ' + str(recipe.user)
-		else:
+		except AttributeError:
 			output = 'no recipe found'
 		
 		return output
