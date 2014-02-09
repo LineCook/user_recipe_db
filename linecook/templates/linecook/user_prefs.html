@@ -1,0 +1,107 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>GE LineCook Oven</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'linecook/dist/css/bootstrap.min.css' %}" href="" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href={% static 'linecook/carousel.css' %} rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body style="padding-top:50px;">
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">GE LineCook</a>
+            </div>
+            <div class="navbar-collapse collapse">o
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="{% url 'user_detail' user.username %}">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+              	<li class="dropdown">
+              		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{ user.first_name }}! <b class="caret"></b></a>
+	              	<ul class="dropdown-menu">
+	              		<li><a href="{% url 'user_prefs' user.username %}">User Preferences</a></li>
+	              		<li><a href="{% url 'index' %}">Logout</a></li>
+	              	</ul>
+              	<i/li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container" style="padding: 40px 15px;">
+
+      <!-- Three columns of text below the carousel -->
+      <h3>Your appliances:</h3>
+<ul>
+{% for userappliance in user.userappliance_set.all %}
+	<li>{{ userappliance.appliance.brand }} {{ userappliance.appliance.model }} ({{ userappliance.appliance.device_type }})</li>
+{% endfor %}
+</ul>
+<input type="button" value="Register a new appliance" />
+<h3>Options</h3>
+<input type="radio" name="recipe_pref" />Use Manufacturer's Recommendation Only<br>
+<input type="radio" name="recipe_pref" />Use User Instructions if Manufactures Recommendation not found<br>
+<input type="radio" name="recipe_pref" />Use highest rated instructions<br>
+<input type="radio" name="recipe_pref" />Use instructions with most completed cooks<br>
+<input type="radio" name="recipe_pref" />Only use my instructions<br>
+<br>
+<input type="radio" name="appliance_pref" value="exact"/>Search for instructinos for my appliances only<br>
+<input type="radio" name="appliance_pref" value="prefer_exact"/>Prefer instructions for my appliances<br>
+<input type="radio" name="appliance_pref" value="any"/>Use instructions for any appliance<br>
+<br>
+<!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{% static 'linecook/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'linecook/docs.min.js' %}"></script>
+  </body>
+</html>
+

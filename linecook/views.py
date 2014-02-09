@@ -13,6 +13,11 @@ def user_detail(request, user_name):
         context = {'user': user}
         return render(request, 'linecook/user_detail.html', context)
 
+def user_prefs(request, user_name):
+        user = User.objects.get(username=user_name)
+        context = {'user': user}
+        return render(request, 'linecook/user_prefs.html', context)
+
 def recipe_detail(request, user_name, recipe_id):
 	recipe = Recipe.objects.get(id=recipe_id)
         user = User.objects.get(username=user_name)
