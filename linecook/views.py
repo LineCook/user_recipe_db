@@ -13,6 +13,19 @@ def user_detail(request, user_name):
         context = {'user': user}
         return render(request, 'linecook/user_detail.html', context)
 
+def recipe_detail(request, user_name, recipe_id):
+	recipe = Recipe.objects.get(id=recipe_id)
+        user = User.objects.get(username=user_name)
+	if request.method == "POST":
+		if request.POST['action'] == 'delete':
+			recipe.step_set.order_by('id').reverse()[0].delete()
+		else:
+			step = Step(recipe = recipe, temp = request.POST['temp'], time = request.POST['time'], mode = request.POST['mode'])
+			step.save()
+        context = {'user': user, 'recipe': recipe}
+        return render(request, 'linecook/recipe_detail.html', context)
+	
+
 def scan(request, app_id, upc):
 	userappliance = UserAppliance.objects.get(id=app_id)
 	appliance = userappliance.appliance

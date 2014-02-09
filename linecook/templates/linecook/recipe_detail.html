@@ -1,0 +1,15 @@
+Recipe for {{ recipe.food }} on {{ recipe.appliance.device_type }}
+<br>
+Current recipe: {{ recipe.human_instructions }}
+<form action="{% url 'recipe_detail' user recipe.id %}" method="post">
+{% csrf_token %}
+Mode<select name="mode">
+<option value="P">Preheat</option>
+<option value="B">Bake</option>
+</select><br>
+Tempurature <input type="text" name="temp" /><br>
+Time <input type="text" name="time" /><br>
+<input type="submit" value="Add Step" />
+<input type="submit" value="Delete Step" onclick="document.getElementById('action').value = 'delete';" />
+<input type="hidden" name="action" id="action" value="" />
+</form>

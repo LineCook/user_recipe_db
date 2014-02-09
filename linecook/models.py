@@ -103,7 +103,7 @@ class UserAppliance(models.Model):
 		return self.user.username + ' ' + self.appliance.model
 	
 class Food(models.Model):
-	name = models.CharField(max_length=40,blank=True)
+	name = models.CharField(max_length=140,blank=True)
 	upc = models.CharField(max_length=12)
 
 	def set_name_from_cloud(self):
