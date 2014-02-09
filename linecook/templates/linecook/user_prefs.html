@@ -68,25 +68,41 @@
 
     <div class="container" style="padding: 40px 15px;">
 
-      <!-- Three columns of text below the carousel -->
-      <h3>Your appliances:</h3>
-<ul>
-{% for userappliance in user.userappliance_set.all %}
-	<li>{{ userappliance.appliance.brand }} {{ userappliance.appliance.model }} ({{ userappliance.appliance.device_type }})</li>
-{% endfor %}
-</ul>
-<input type="button" value="Register a new appliance" />
-<h3>Options</h3>
-<input type="radio" name="recipe_pref" />Use Manufacturer's Recommendation Only<br>
-<input type="radio" name="recipe_pref" />Use User Instructions if Manufactures Recommendation not found<br>
-<input type="radio" name="recipe_pref" />Use highest rated instructions<br>
-<input type="radio" name="recipe_pref" />Use instructions with most completed cooks<br>
-<input type="radio" name="recipe_pref" />Only use my instructions<br>
-<br>
-<input type="radio" name="appliance_pref" value="exact"/>Search for instructinos for my appliances only<br>
-<input type="radio" name="appliance_pref" value="prefer_exact"/>Prefer instructions for my appliances<br>
-<input type="radio" name="appliance_pref" value="any"/>Use instructions for any appliance<br>
-<br>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <h3>Your Appliances</h3>
+          <ul>
+          {% for userappliance in user.userappliance_set.all %}
+            <li>{{ userappliance.appliance.brand }} {{ userappliance.appliance.model }} ({{ userappliance.appliance.device_type }})</li>
+          {% endfor %}
+          </ul>
+        </div>
+        <div class="row">
+          <h2>Register a New Appliance</h2>
+          <form action="">
+          <div class="col-md-5"><div class="form-group"><input type="text" class="form-control" id="searchTerm" placeholder="Appliance ID"></div></div>
+          <div class="col-md-1"><div class="form-group"><button type="button" class="btn btn-primary">Register</button></div></div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row">
+          <h3>Options</h3>
+          <input type="radio" name="recipe_pref" />Use Manufacturer's Recommendation Only <a href="#" class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Use only recipes from a food manufacturer."><span class="glyphicon glyphicon-question-sign"></span></a><br>
+          <input type="radio" name="recipe_pref" />Use User Instructions if Manufactures Recommendation not found <a href="#" class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Search your own instructions first, then use manufacturer instructions."><span class="glyphicon glyphicon-question-sign"></span></a><br>
+          <input type="radio" name="recipe_pref" />Use highest rated instructions <a href="#" class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Use the highest ranked instructions from around the internet."><span class="glyphicon glyphicon-question-sign"></span></a><br>
+          <input type="radio" name="recipe_pref" />Use instructions with most completed cooks <a href="#" class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Use the most popular recipes, even if they suck!"><span class="glyphicon glyphicon-question-sign"></span></a><br>
+          <input type="radio" name="recipe_pref" />Only use my instructions <a href="#" class="tooltip-link" data-toggle="tooltip" data-placement="bottom" title="Use My Recipes Only"><span class="glyphicon glyphicon-question-sign"></span></a><br>
+          <br>
+          <input type="radio" name="appliance_pref" value="exact"/>Search for instructinos for my appliances only <span class="glyphicon glyphicon-question-sign"></span><br>
+          <input type="radio" name="appliance_pref" value="prefer_exact"/>Prefer instructions for my appliances <span class="glyphicon glyphicon-question-sign"></span><br>
+          <input type="radio" name="appliance_pref" value="any"/>Use instructions for any appliance <span class="glyphicon glyphicon-question-sign"></span><br>
+          <br>
+        </div>
+      </div>
+    </div>
+
 <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
@@ -102,6 +118,9 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="{% static 'linecook/dist/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'linecook/docs.min.js' %}"></script>
+    <script>
+      $('.tooltip-link').tooltip();
+    </script>
   </body>
 </html>
 
