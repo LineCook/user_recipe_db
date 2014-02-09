@@ -1,0 +1,23 @@
+<h2>Welcome {{ user.first_name }}!</h2>
+<h3>Your food:</h3>
+<ul>
+{% for recipe in user.recipe_set.all %}
+		<li>{{ recipe.food }} {{ recipe.human_instructions }}</li>
+{% endfor %}
+</ul>
+<h3>Your appliances:</h3>
+<ul>
+{% for userappliance in user.userappliance_set.all %}
+	<li>{{ userappliance.appliance.brand }} {{ userappliance.appliance.model }} ({{ userappliance.appliance.device_type }})</li>
+{% endfor %}
+</ul>
+<h3>Options</h3>
+<input type="radio" name="recipe_pref" />Use Manufacturer's Recommendation Only<br>
+<input type="radio" name="recipe_pref" />Use User Instructions if Manufactures Recommendation not found<br>
+<input type="radio" name="recipe_pref" />Use highest rated instructions<br>
+<input type="radio" name="recipe_pref" />Use instructions with most completed cooks<br>
+<input type="radio" name="recipe_pref" />Only use my instructions<br>
+<br>
+<input type="radio" name="appliance_pref" value="exact"/>Search for instructinos for my appliances only<br>
+<input type="radio" name="appliance_pref" value="prefer_exact"/>Prefer instructions for my appliances<br>
+<input type="radio" name="appliance_pref" value="any"/>Use instructions for any appliance<br>

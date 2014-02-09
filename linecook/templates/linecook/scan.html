@@ -1,0 +1,7 @@
+{% if recipe == "Not found" %}
+recipe not found
+{% else %}
+	{% for step in recipe.step_set.all %}
+{{ step.mode }}{{ step.temp }} T{{ step.time }}:	
+	{% endfor %}
+{% endif %}
