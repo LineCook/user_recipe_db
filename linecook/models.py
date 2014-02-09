@@ -1,5 +1,6 @@
 from django.db import models
 from xmlrpclib import ServerProxy, Error
+import ean
 
 #this API key is registered to Aaron VerDow and is for testing only
 #please do not abuse
@@ -108,9 +109,24 @@ class Food(models.Model):
 	name = models.CharField(max_length=140,blank=True)
 	upc = models.CharField(max_length=40)
 
-	def set_name_from_cloud(self):
+	def validate_upc(self):
+		return ean.upcaValid(self.upc)
+
+	def convert_upc(self):
+		if ean.upceValid(self.upc) == True:
+			return ean.upce2a(self.upc)
+		else:
+			return self.upc
+
+	def get_info(self):
                 s = ServerProxy('http://www.upcdatabase.com/xmlrpc')
                 params = { 'rpc_key': rpc_key, 'upc': self.upc }
+                response = s.lookup(params)
+		return response
+
+	def set_name_from_cloud(self):
+                s = ServerProxy('http://www.upcdatabase.com/xmlrpc')
+                params = { 'rpc_key': rpc_key, 'upc': self.convert_upc() }
                 response = s.lookup(params)
 		if response['status'] == 'success':
 			self.name = response['description']

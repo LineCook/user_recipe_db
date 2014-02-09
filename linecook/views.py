@@ -59,8 +59,8 @@ def scan(request, app_id, upc):
 	output = ''
 	for step in steps:
 		output += step.mode + str(step.temp) + ",T" + str(step.time) + ":"
-
+	
 	if output == '':
-		raise Http404
+		output = 'P0,T0:'
 
 	return HttpResponse(output)
