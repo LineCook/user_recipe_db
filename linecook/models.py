@@ -57,7 +57,7 @@ class Recipe(models.Model):
 
 			output += 'by ' + str(recipe.user)
 		except AttributeError:
-			output = 'no recipe found'
+			output = ''
 		
 		return output
 				
@@ -104,7 +104,7 @@ class UserAppliance(models.Model):
 	
 class Food(models.Model):
 	name = models.CharField(max_length=140,blank=True)
-	upc = models.CharField(max_length=12)
+	upc = models.CharField(max_length=40)
 
 	def set_name_from_cloud(self):
                 s = ServerProxy('http://www.upcdatabase.com/xmlrpc')

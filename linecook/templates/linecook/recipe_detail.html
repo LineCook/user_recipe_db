@@ -42,11 +42,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">GE LineCook</a>
+              <a class="navbar-brand" href="{% url 'user_detail' user %}">GE LineCook</a>
             </div>
-            <div class="navbar-collapse collapse">o
+            <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="{% url 'user_detail' user %}">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
               </ul>
@@ -55,7 +55,7 @@
               		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{ user.first_name }}! <b class="caret"></b></a>
 	              	<ul class="dropdown-menu">
 	              		<li><a href="{% url 'user_prefs' user.username %}">User Preferences</a></li>
-	              		<li><a href="#">Logout</a></li>
+	              		<li><a href="{% url 'index' %}">Logout</a></li>
 	              	</ul>
               	<i/li>
               </ul>

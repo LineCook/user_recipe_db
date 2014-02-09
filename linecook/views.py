@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from linecook.models import Appliance, Food, Recipe, Step, User, UserAppliance
 from django.http import HttpResponse
+from django.http import Http404
 
 # Create your views here.
 def index(request):
@@ -51,9 +52,9 @@ def scan(request, app_id, upc):
 	steps = user_recipe.get_steps()
 	output = ''
 	for step in steps:
-		output += step.mode + str(step.temp) + "T" + str(step.time) + ":"
+		output += step.mode + str(step.temp) + ",T" + str(step.time) + ":"
 
 	if output == '':
-		output = "recipe not found"
+		raise Http404
 
 	return HttpResponse(output)

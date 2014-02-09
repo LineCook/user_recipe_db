@@ -42,11 +42,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">GE LineCook</a>
+              <a class="navbar-brand" href="{% url 'user_detail' user %}">GE LineCook</a>
             </div>
-            <div class="navbar-collapse collapse">o
+            <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="{% url 'user_detail' user %}">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
               </ul>
@@ -113,21 +113,3 @@
     <script src="{% static 'linecook/docs.min.js' %}"></script>
   </body>
 </html>
-
-
-<h3>Your appliances:</h3>
-<ul>
-{% for userappliance in user.userappliance_set.all %}
-	<li>{{ userappliance.appliance.brand }} {{ userappliance.appliance.model }} ({{ userappliance.appliance.device_type }})</li>
-{% endfor %}
-</ul>
-<h3>Options</h3>
-<input type="radio" name="recipe_pref" />Use Manufacturer's Recommendation Only<br>
-<input type="radio" name="recipe_pref" />Use User Instructions if Manufactures Recommendation not found<br>
-<input type="radio" name="recipe_pref" />Use highest rated instructions<br>
-<input type="radio" name="recipe_pref" />Use instructions with most completed cooks<br>
-<input type="radio" name="recipe_pref" />Only use my instructions<br>
-<br>
-<input type="radio" name="appliance_pref" value="exact"/>Search for instructinos for my appliances only<br>
-<input type="radio" name="appliance_pref" value="prefer_exact"/>Prefer instructions for my appliances<br>
-<input type="radio" name="appliance_pref" value="any"/>Use instructions for any appliance<br>
