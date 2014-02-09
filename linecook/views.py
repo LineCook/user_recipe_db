@@ -10,9 +10,15 @@ def index(request):
         return render(request, 'linecook/index.html', context)
 
 def user_detail(request, user_name):
-        user = User.objects.get(username=user_name)
-        context = {'user': user}
-        return render(request, 'linecook/user_detail.html', context)
+	try:
+		user = User.objects.get(username=user_name)
+	except User.DoesNotExist:
+		user_list = User.objects.all()
+		context = {'user_list': user_list}
+		return render(request, 'linecook/index.html', context)
+	else:
+		context = {'user': user}
+		return render(request, 'linecook/user_detail.html', context)
 
 def user_prefs(request, user_name):
         user = User.objects.get(username=user_name)

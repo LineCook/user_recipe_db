@@ -52,6 +52,8 @@ class Recipe(models.Model):
 					output += 'Preheat to ' + str(step.temp) + ' '
 				elif step.mode == 'B':
 					output += 'bake at ' + str(step.temp) + ' for ' + str(step.time) + ' minutes, '
+				elif step.mode == 'O':
+					output += 'broil for ' + str(step.time) + ' minutes, '
 				else:
 					output += step.mode + ' at ' + str(step.temp) + ' for ' + str(step.time) + ' minutes, '
 

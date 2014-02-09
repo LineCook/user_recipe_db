@@ -68,14 +68,9 @@
 
     <div class="container">
 
-	<div class="row">
-		<div class="col-md-12">
-			<h1 class="page-header">Recipe for {{ recipe.food }} on {{ recipe.appliance.device_type }}</h1>
-		</div>
-	</div>
       <div class="row">
 		<div class="col-md-6">
-			<div class="row"><h3>Current Recipe</h3></div>
+			<div class="row"><h3>Recipe for {{ recipe.food }} on {{ recipe.appliance.device_type }}</h3></div>
 			<div class="row">{{ recipe.human_instructions }}</div>
 		</div>
 		<div class="col-md-6">
@@ -89,6 +84,7 @@
 							<select name="mode">
 								<option value="P">Preheat</option>
 								<option value="B">Bake</option>
+								<option value="O">Broil</option>
 							</select>
 						</div>
 					</div>
@@ -111,7 +107,8 @@
 			</div>
 		</div>
 
-      </div><!-- /.row -->
+      </div><!-- /.row --> 
+	<br>
 
       <!-- FOOTER -->
       <footer>
