@@ -1,15 +1,132 @@
-Recipe for {{ recipe.food }} on {{ recipe.appliance.device_type }}
-<br>
-Current recipe: {{ recipe.human_instructions }}
-<form action="{% url 'recipe_detail' user recipe.id %}" method="post">
-{% csrf_token %}
-Mode<select name="mode">
-<option value="P">Preheat</option>
-<option value="B">Bake</option>
-</select><br>
-Tempurature <input type="text" name="temp" /><br>
-Time <input type="text" name="time" /><br>
-<input type="submit" value="Add Step" />
-<input type="submit" value="Delete Step" onclick="document.getElementById('action').value = 'delete';" />
-<input type="hidden" name="action" id="action" value="" />
-</form>
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>GE LineCook</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'linecook/dist/css/bootstrap.min.css' %}" href="" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href={% static 'linecook/carousel.css' %} rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body style="padding-top:50px;">
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">GE LineCook</a>
+            </div>
+            <div class="navbar-collapse collapse">o
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+              	<li class="dropdown">
+              		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{ user.first_name }}! <b class="caret"></b></a>
+	              	<ul class="dropdown-menu">
+	              		<li><a href="#">User Preferences</a></li>
+	              		<li><a href="#">Logout</a></li>
+	              	</ul>
+              	<i/li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container">
+
+	<div class="row">
+		<div class="col-md-12">
+			<h1 class="page-header">Recipe for {{ recipe.food }} on {{ recipe.appliance.device_type }}</h1>
+		</div>
+	</div>
+      <div class="row">
+		<div class="col-md-6">
+			<div class="row"><h3>Current Recipe</h3></div>
+			<div class="row">{{ recipe.human_instructions }}</div>
+		</div>
+		<div class="col-md-6">
+			<div class="row"><h3>Add a Step</h3></div>
+			<div class="row">
+				<form class="form-horizontal" action="{% url 'recipe_detail' user recipe.id %}" method="post">
+					{% csrf_token %}
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="mode">Mode</label>
+						<div class="col-sm-4">
+							<select name="mode">
+								<option value="P">Preheat</option>
+								<option value="B">Bake</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="temp">Temperature</label>
+						<div class="col-sm-4">
+							<input type="text" name="temp" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="time">Time</label>
+						<div class="col-sm-4">
+							<input type="text" name="time" />
+						</div>
+					</div>
+					<button class="btn btn-primary" type="submit" value="Add Step">Add Step</button>
+					<button class="btn btn-danger" type="submit" value="Delete Step" onclick="document.getElementById('action').value = 'delete';">Delete Step</button>
+					<input type="hidden" name="action" id="action" value="" />
+				</form>
+			</div>
+		</div>
+
+      </div><!-- /.row -->
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{% static 'linecook/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'linecook/docs.min.js' %}"></script>
+  </body>
+</html>

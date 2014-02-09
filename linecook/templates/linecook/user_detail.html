@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>GE LineCook Oven</title>
+    <title>GE LineCook</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'linecook/dist/css/bootstrap.min.css' %}" href="" rel="stylesheet">
@@ -42,7 +42,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">GE LineCook Oven</a>
+              <a class="navbar-brand" href="#">GE LineCook</a>
             </div>
             <div class="navbar-collapse collapse">o
               <ul class="nav navbar-nav">
@@ -70,12 +70,30 @@
 
       <!-- Three columns of text below the carousel -->
       <div class="row">
-		<div class="col-lg-8">
+		<div class="col-md-6">
 			<div class="row">
 				<h3>Recent Recipes</h3>
+				<ul>
+				{% for recipe in user.recipe_set.all %}
+						<li><a href="{% url 'recipe_detail' user recipe.id %}">{{ recipe.food }}</a><br/>
+						{{ recipe.human_instructions }}</li>
+				{% endfor %}
+				</ul>
 			</div>
 		</div>
-		<div class="col-lg-8"></div>
+		<div class="col-md-6">
+			<div class="row">
+				<h3>Find a Food</h3>
+				<form action="">
+				<div class="col-md-5"><div class="form-group"><input type="search" class="form-control" id="searchTerm"></div></div>
+				<div class="col-md-1"><div class="form-group"><button type="button" class="btn btn-primary">Search</button></div></div>
+				</form>
+			</div>
+			<div class="row">
+				<h3>Make a Custom QR Food</h3>
+				<div class="col-md-6" style="text-align:center"><a href="#" class="text-center btn btn-default">Generate Code</a></div>	
+			</div>
+		</div>
       </div><!-- /.row -->
 
       <!-- FOOTER -->
@@ -97,13 +115,6 @@
 </html>
 
 
-<h2>Welcome {{ user.first_name }}!</h2>
-<h3>Your food:</h3>
-<ul>
-{% for recipe in user.recipe_set.all %}
-		<li>{{ recipe.food }} {{ recipe.human_instructions }}</li>
-{% endfor %}
-</ul>
 <h3>Your appliances:</h3>
 <ul>
 {% for userappliance in user.userappliance_set.all %}
